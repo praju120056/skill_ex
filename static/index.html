@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skill Exchange Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script defer src="/static/script.js"></script>
+  <style>
+    .feature-section {
+      margin-bottom: 20px;
+    }
+    .feature-toggle {
+      background: #ff8a00;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .feature-content {
+      display: none;
+      margin-top: 10px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+    #logoutBtnBottom {
+      width: 100%;
+      margin-top: 30px;
+      padding: 12px;
+      background: #d32f2f;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #logoutBtnBottom:hover {
+      background: #b71c1c;
+    }
+    .hero-title {
+      font-size: 4rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      letter-spacing: 3px;
+      text-align: center;
+      background: linear-gradient(to right, #ff8a00, #e52e71);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+  <script>
+    function toggleFeature(id) {
+      document.querySelectorAll('.feature-content').forEach(div => div.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div id="left-side">
+      <div class="hero-section">
+        <h1 class="hero-title">Skill Exchange Program</h1>
+      </div>
+    </div>
+
+    <div id="right-side">
+      <div id="auth">
+        <!-- Register Form -->
+        <div id="registerForm">
+          <h2>Register</h2>
+          <input id="reg_name" placeholder="Name" autocomplete="name" />
+          <input id="reg_email" placeholder="Email" autocomplete="email" />
+          <input id="reg_pass" type="password" placeholder="Password" autocomplete="new-password" />
+          <button onclick="register()">Register</button>
+          <p class="toggle-text">Already have an account? <a href="#" onclick="showLogin(event)">Login</a></p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" style="display:none;">
+          <h2>Login</h2>
+          <input id="log_email" placeholder="Email" autocomplete="email" />
+          <input id="log_pass" type="password" placeholder="Password" autocomplete="current-password" />
+          <button onclick="login()">Login</button>
+          <p class="toggle-text">Don't have an account? <a href="#" onclick="showRegister(event)">Register</a></p>
+        </div>
+      </div>
+
+      <div id="appContent" style="display:none;">
+        <div class="feature-section">
+          <div class="feature-toggle" onclick="toggleFeature('addSkillSection')">Add Skill</div>
+          <div class="feature-content" id="addSkillSection">
+            <input type="text" id="addSkillName" placeholder="Skill name">
+            <select id="addSkillType">
+              <option value="know">I Know</option>
+              <option value="learn">I Want to Learn</option>
+            </select>
+            <button onclick="handleAddSkill()">Add Skill</button>
+            <div id="addSkillResult"></div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="feature-toggle" onclick="toggleFeature('matchSection')">Find a Teacher</div>
+          <div class="feature-content" id="matchSection">
+            <input type="text" id="matchSkillInput" placeholder="Enter skill name">
+            <button onclick="handleFindMatches()">Find</button>
+            <ul id="matchResults"></ul>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="feature-toggle" onclick="toggleFeature('userSearchSection')">Search Users</div>
+          <div class="feature-content" id="userSearchSection">
+            <input type="text" id="userSearchInput" placeholder="Enter name or email">
+            <button onclick="handleUserSearch()">Search</button>
+            <button class="inline-button" onclick="loadAllUsers()">Show All Users</button>
+            <ul id="userSearchResults"></ul>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="feature-toggle" onclick="toggleFeature('skillSearchSection')">Search Skills</div>
+          <div class="feature-content" id="skillSearchSection">
+            <input type="text" id="skillSearchInput" placeholder="Enter skill name">
+            <button onclick="handleSkillSearch()">Search</button>
+            <button class="inline-button" onclick="loadAllSkills()">Show All Skills</button>
+            <ul id="skillSearchResults"></ul>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="feature-toggle" onclick="toggleFeature('viewProfileSection')">View User Profile</div>
+          <div class="feature-content" id="viewProfileSection">
+            <input type="number" id="profileUserId" placeholder="Enter User ID">
+            <button onclick="handleViewProfile()">View Profile</button>
+            <div id="profileResult"></div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="feature-toggle" onclick="toggleFeature('yourProfileSection')">Your Profile</div>
+          <div class="feature-content" id="yourProfileSection">
+            <button onclick="loadProfile()">Load My Profile</button>
+            <pre id="profileInfo"></pre>
+          </div>
+        </div>
+
+        <button id="logoutBtnBottom" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
