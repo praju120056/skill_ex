@@ -19,8 +19,8 @@ A simple full-stack web application built using Flask and MySQL where users can 
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/skill-exchange-program.git
-cd skill-exchange-program
+git clone https://github.com/praju120056/skill_ex.git
+cd skill_ex
 
 # Create a virtual environment
 python -m venv venv
